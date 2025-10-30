@@ -18,6 +18,7 @@
       --accent: var(--gold);
       --radius: 16px;
       --container-max: 1100px;
+      --transition: 220ms;
     }
     *{box-sizing:border-box}
     body{
@@ -27,32 +28,46 @@
       color:#fff;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
+      -webkit-font-feature-settings: "liga" 1;
     }
 
-    .topbar{background:linear-gradient(90deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4));backdrop-filter:blur(4px);border-bottom:1px solid rgba(255,255,255,0.03)}
+    /* NAV */
+    .topbar{
+      background:linear-gradient(90deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4));
+      backdrop-filter: blur(4px);
+      border-bottom:1px solid rgba(255,255,255,0.03);
+      position:sticky; top:0; z-index:60;
+      transition: box-shadow var(--transition);
+    }
+    .topbar.scrolled{ box-shadow: 0 6px 20px rgba(0,0,0,0.6); }
     .brand{display:flex;align-items:center;gap:.8rem;font-weight:700;color:var(--gold)}
     .brand img{height:44px;width:44px;border-radius:8px;object-fit:cover}
 
+    nav.main-nav a{ color:var(--muted); text-decoration:none; padding:8px 6px; border-radius:8px; transition: background var(--transition), color var(--transition);}
+    nav.main-nav a:hover{ color:#fff; background: rgba(255,255,255,0.03); }
+
+    /* HERO */
     .hero{
       padding:70px 16px;
       display:flex;
       align-items:center;
       justify-content:center;
       gap:40px;
-      flex-wrap:wrap;
     }
     .hero-inner{max-width:var(--container-max);display:grid;grid-template-columns:1fr 520px;gap:40px;align-items:center}
-    .hero h1{font-size:2.6rem;margin:0 0 .6rem;color:var(--gold)}
+    .hero h1{font-size:2.6rem;margin:0 0 .6rem;color:var(--gold); line-height:1.05}
     .lead{color:var(--muted);font-size:1.05rem;margin-bottom:18px}
 
     .hero-visual{border-radius:18px;overflow:hidden;box-shadow:0 30px 50px rgba(0,0,0,0.6);background:linear-gradient(180deg, rgba(212,175,55,0.06), rgba(0,0,0,0.0))}
     .hero-visual img{display:block;width:100%;height:100%;object-fit:cover}
 
+    /* STATS */
     .stats{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px}
-    .stat{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));padding:14px 18px;border-radius:12px;min-width:160px;box-shadow:0 8px 30px rgba(5,8,10,0.6)}
+    .stat{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));padding:14px 18px;border-radius:12px;min-width:140px;box-shadow:0 8px 30px rgba(5,8,10,0.6)}
     .stat h3{margin:0;font-size:1.3rem;color:var(--gold)}
     .stat p{margin:4px 0 0;color:var(--muted);font-size:.9rem}
 
+    /* SECTION TITLES */
     .section{padding:60px 16px}
     .container-x{max-width:var(--container-max);margin:0 auto}
 
@@ -60,69 +75,114 @@
     .section-title h3{margin:0;color:var(--gold)}
     .section-sub{color:var(--muted);font-size:.98rem}
 
-    .card-dark{background:var(--card);border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.03)}
+    /* CARDS */
+    .card-dark{background:var(--card);border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.03); transition: transform var(--transition), box-shadow var(--transition)}
+    .card-dark:hover{ transform: translateY(-6px); box-shadow:0 20px 50px rgba(0,0,0,0.55); border-color: rgba(212,175,55,0.12) }
     .person-photo{height:120px;width:120px;border-radius:12px;object-fit:cover;border:3px solid rgba(255,255,255,0.03)}
 
+    /* FEATURES */
     .features{display:grid;grid-template-columns:repeat(auto-fit, minmax(220px,1fr));gap:16px}
 
+    /* BENEFITS */
     .benefit{display:flex;gap:14px;align-items:flex-start;background:var(--glass);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
 
+    /* TIMELINE */
     .timeline{display:flex;flex-direction:column;gap:14px}
     .timeline .item{display:flex;gap:12px;align-items:flex-start}
     .timeline .dot{min-width:28px;height:28px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#000;font-weight:700}
 
+    /* TESTIMONIALS */
     .test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
 
-    .faq-item{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));padding:12px;border-radius:10px}
+    /* FAQ */
+    .faq-item{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));padding:12px;border-radius:10px; transition: max-height 240ms ease, background 240ms }
 
+    /* FACTS BLOCKS */
+    .facts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;align-items:stretch}
+    .fact-card{padding:18px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;gap:12px;justify-content:space-between}
+    .fact-card .big-num{font-size:1.6rem;color:var(--gold);font-weight:800}
+    .fact-card .small{color:var(--muted);font-size:.95rem}
+
+    /* CTA fixed */
     .whatsapp-fixed{position:fixed;right:18px;bottom:18px;background:var(--gold);color:#000;border-radius:999px;padding:12px 14px;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,0.4);z-index:999}
     .whatsapp-fixed img{height:22px;margin-right:8px;vertical-align:middle}
 
+    /* FOOTER */
     footer{padding:36px 16px;background:#020202;color:var(--muted)}
 
-    footer a{color:var(--gold);text-decoration:none}
+    /* small utilities */
+    .muted{color:var(--muted)}
+    .pill{background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;color:var(--muted);font-size:.9rem}
 
-    @media (max-width:1000px){ .hero-inner{grid-template-columns:1fr} .hero-visual{order:-1} .hero{padding:36px 16px} .hero h1{font-size:1.9rem} }
-    @media (max-width:600px){
-      .stats{flex-direction:column;gap:12px}
-      .benefit{flex-direction:column;align-items:flex-start}
-      .timeline .item{flex-direction:column;gap:8px}
+    /* responsive tweaks */
+    @media (max-width:1000px){
+      .hero-inner{grid-template-columns:1fr}
+      .hero-visual{order:-1}
+      .hero{padding:36px 16px}
+      .hero h1{font-size:1.9rem}
+      .stats{justify-content:flex-start}
     }
+
+    @media (max-width:720px){
+      .person-photo{height:92px;width:92px}
+      .card-dark{padding:14px}
+      .section{padding:36px 12px}
+      .section-title{margin-bottom:18px}
+      .hero{padding:28px 12px}
+      .hero h1{font-size:1.6rem}
+      .lead{font-size:1rem}
+      nav.main-nav{display:none}
+    }
+
+    @media (max-width:420px){
+      .person-photo{height:84px;width:84px}
+      .stat{min-width:120px;padding:12px}
+      .hero h1{font-size:1.3rem}
+      .lead{font-size:.95rem}
+      .fact-card .big-num{font-size:1.25rem}
+    }
+
+    /* simple appear animations */
+    .fade-up{opacity:0;transform:translateY(10px);transition:all 480ms cubic-bezier(.2,.9,.2,1)}
+    .fade-up.is-visible{opacity:1;transform:none}
   </style>
 </head>
 <body>
 
-  <header class="topbar">
-    <div class="container-x" style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;flex-wrap:wrap">
+  <!-- NAV -->
+  <header class="topbar" id="topbar">
+    <div class="container-x d-flex align-items-center justify-content-between" style="padding:12px 16px;">
       <div class="brand">
         <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><rect rx='16' width='120' height='120' fill='%23d4af37'/><text x='50%' y='55%' font-family='Poppins, Arial' font-size='42' fill='%23000000' text-anchor='middle' alignment-baseline='middle'>LM</text></svg>" alt="Lemon Mall logo">
         <div>
           <div style="font-size:1.05rem">Lemon Mall</div>
-          <small style="color:var(--muted);font-size:.78rem">официальный партнёр HUAGE</small>
+          <small class="muted" style="font-size:.78rem">официальный партнёр HUAGE</small>
         </div>
       </div>
 
-      <nav style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding-top:8px">
-        <a href="#how" style="color:var(--muted);text-decoration:none">Как работает</a>
-        <a href="#benefits" style="color:var(--muted);text-decoration:none">Выгоды</a>
-        <a href="#facts" style="color:var(--muted);text-decoration:none">Факты</a>
-        <a href="#clients" style="color:var(--muted);text-decoration:none">Партнёры</a>
-        <a href="#contact" class="btn" style="background:var(--gold);color:#000;border-radius:10px;padding:8px 14px;font-weight:700;text-decoration:none">Присоединиться</a>
+      <nav class="main-nav d-flex align-items-center" style="gap:12px">
+        <a href="#how">Как работает</a>
+        <a href="#benefits">Выгоды</a>
+        <a href="#facts-wb">Факты</a>
+        <a href="#clients">Партнёры</a>
+        <a href="#contact" class="btn" style="background:var(--gold);color:#000;border-radius:10px;padding:8px 14px;text-decoration:none;font-weight:700">Присоединиться</a>
       </nav>
     </div>
   </header>
 
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-inner container-x">
-      <div>
+      <div class="fade-up" data-anim>
         <h1>Lemon Mall & HUAGE — платформа роста и дохода</h1>
         <p class="lead">Мы создаём экосистему для партнёров: обучение, инструменты лидогенерации, автоматизация и возможность получить долю в проекте. Стань частью сообщества из более чем <strong>10 000 зарегистрированных партнёров</strong>.</p>
-        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+
+        <div class="d-flex gap-2 flex-wrap">
           <a class="btn" href="#contact" style="background:var(--gold);color:#000;padding:12px 18px;border-radius:12px;font-weight:700">Стать партнёром</a>
           <a class="btn" href="#benefits" style="background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 16px;border-radius:12px;color:var(--muted)">Узнать выгоды</a>
         </div>
 
-        <div class="stats" style="margin-top:20px">
+        <div class="stats mt-3">
           <div class="stat">
             <h3 id="counter-partners">10 000+</h3>
             <p>Зарегистрированных партнёров</p>
@@ -138,157 +198,409 @@
         </div>
       </div>
 
-      <div class="hero-visual">
-        <img src="https://images.unsplash.com/photo-1573164574232-6fffe8c95e44?auto=format&fit=crop&w=1200&q=80" alt="hero visual">
+      <div class="hero-visual fade-up" data-anim>
+        <img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=1200&q=80" alt="hero visual">
       </div>
     </div>
   </section>
 
+  <!-- HOW IT WORKS -->
   <section id="how" class="section">
     <div class="container-x">
       <div class="section-title"><h3>Как это работает</h3></div>
+
       <div class="features">
-        <div class="card-dark"><h5>1. Регистрация и профиль</h5><p class="section-sub">Быстрая регистрация, профиль партнёра и карточка с биографией — делитесь опытом и привлекайте клиентов.</p></div>
-        <div class="card-dark"><h5>2. Обучение и поддержка</h5><p class="section-sub">Готовые скрипты, видео-курсы и персональные наставники — всё для быстрого старта.</p></div>
-        <div class="card-dark"><h5>3. Инструменты продаж</h5><p class="section-sub">Автоматизированные ссылки, трекинг лидов, WhatsApp-интеграция и маркетинговые материалы.</p></div>
-        <div class="card-dark"><h5>4. Мотивация и бонусы</h5><p class="section-sub">Комиссии, бонусы за рост команды и шанс получить долю/акции при выполнении условий кампании.</p></div>
+        <div class="card-dark fade-up" data-anim>
+          <h5>1. Регистрация и профиль</h5>
+          <p class="section-sub">Быстрая регистрация, профиль партнёра и карточка с биографией — делитесь опытом и привлекайте клиентов.</p>
+        </div>
+        <div class="card-dark fade-up" data-anim>
+          <h5>2. Обучение и поддержка</h5>
+          <p class="section-sub">Готовые скрипты, видео-курсы и персональные наставники — всё для быстрого старта.</p>
+        </div>
+        <div class="card-dark fade-up" data-anim>
+          <h5>3. Инструменты продаж</h5>
+          <p class="section-sub">Автоматизированные ссылки, трекинг лидов, WhatsApp-интеграция и маркетинговые материалы.</p>
+        </div>
+        <div class="card-dark fade-up" data-anim>
+          <h5>4. Мотивация и бонусы</h5>
+          <p class="section-sub">Комиссии, бонусы за рост команды и шанс получить долю/акции при выполнении условий кампании.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="benefits" class="section" style="background:linear-gradient(180deg, rgba(255,215,0,0.02), transparent)">
+  <!-- ALIBABA FACTS (placed after How it works) -->
+  <section id="facts-alibaba" class="section" style="background:linear-gradient(180deg, rgba(255,215,0,0.01), transparent)">
+    <div class="container-x">
+      <div class="section-title"><h3>Глобальный пример: Alibaba</h3></div>
+
+      <div class="facts-grid">
+        <div class="fact-card fade-up" data-anim>
+          <div>
+            <div class="big-num">1999</div>
+            <div class="small">Год основания Alibaba Г. Джеком Ма — пример, как платформа растёт до глобальной экосистемы.</div>
+          </div>
+          <div class="muted">Alibaba показала, как платформа может объединять миллионы продавцов и покупателей, внедрять логистику и финтех-решения.</div>
+        </div>
+
+        <div class="fact-card fade-up" data-anim>
+          <div>
+            <div class="big-num">IPO $25B</div>
+            <div class="small">Одна из крупнейших IPO в истории (2014) — подтверждение масштабной бизнес-модели.</div>
+          </div>
+          <div class="muted">Масштаб и интеграция сервисов — пример для построения инфраструктуры Lemon Mall + HUAGE.</div>
+        </div>
+
+        <div class="fact-card fade-up" data-anim>
+          <div>
+            <div class="big-num">Миллионы</div>
+            <div class="small">Пользователей и продавцов по миру — возможность масштабирования при правильной экосистеме.</div>
+          </div>
+          <div class="muted">Урок: платформа + партнёрская сеть = устойчивый рост при грамотной логистике и поддержке.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section id="benefits" class="section">
     <div class="container-x">
       <div class="section-title"><h3>Выгоды партнёрства</h3></div>
+
       <div style="display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start">
         <div>
-          <div class="benefit mb-3"><div style="font-size:1.7rem;color:var(--gold)">📈</div><div><strong>Пассивный доход</strong><div class="section-sub">Комиссии с покупок вашей сети и прозрачная система выплат.</div></div></div>
-          <div class="benefit mb-3"><div style="font-size:1.7rem;color:var(--gold)">🎓</div><div><strong>Обучение лидеров</strong><div class="section-sub">Шаблоны, готовые скрипты и пошаговые сценарии для новичков.</div></div></div>
-          <div class="benefit mb-3"><div style="font-size:1.7rem;color:var(--gold)">🏬</div><div><strong>Пункты выдачи и инфраструктура</strong><div class="section-sub">Право открытия выдачных пунктов и дополнительные источники дохода.</div></div></div>
-          <div class="benefit mb-3"><div style="font-size:1.7rem;color:var(--gold)">🤝</div><div><strong>Доля в проекте</strong><div class="section-sub">Участие в акциях и специальных программах для старших менеджеров.</div></div></div>
+          <div class="benefit mb-3 fade-up" data-anim>
+            <div style="font-size:1.7rem;color:var(--gold)">📈</div>
+            <div>
+              <strong>Пассивный доход</strong>
+              <div class="section-sub">Комиссии с покупок вашей сети и прозрачная система выплат.</div>
+            </div>
+          </div>
+
+          <div class="benefit mb-3 fade-up" data-anim>
+            <div style="font-size:1.7rem;color:var(--gold)">🎓</div>
+            <div>
+              <strong>Обучение лидеров</strong>
+              <div class="section-sub">Шаблоны, готовые скрипты и пошаговые сценарии для новичков.</div>
+            </div>
+          </div>
+
+          <div class="benefit mb-3 fade-up" data-anim>
+            <div style="font-size:1.7rem;color:var(--gold)">🏬</div>
+            <div>
+              <strong>Пункты выдачи и партнёрская инфраструктура</strong>
+              <div class="section-sub">Право открытия выдачных пунктов и дополнительные источники дохода.</div>
+            </div>
+          </div>
+
+          <div class="benefit mb-3 fade-up" data-anim>
+            <div style="font-size:1.7rem;color:var(--gold)">🤝</div>
+            <div>
+              <strong>Доля в проекте</strong>
+              <div class="section-sub">Участие в акциях и специальных программах для старших менеджеров.</div>
+            </div>
+          </div>
         </div>
-        <div class="card-dark"><h5>Кратко о выгодах</h5><p class="section-sub">Lemon Mall & HUAGE — сочетание маркетплейса и сети дистрибуции: работает как платформа продаж и как партнёрская программа с мотивацией лидеров. Мы даём набор инструментов для роста и удержания клиентов.</p><hr style="border-color:rgba(255,255,255,0.03)"><ul style="list-style:none;padding:0;margin:0;color:var(--muted)"><li>✓ Готовые обучающие материалы</li><li>✓ Интеграция с WhatsApp и CRM</li><li>✓ Личные менеджеры по регионам</li><li>✓ Возможность открыть пункт выдачи</li></ul></div>
+
+        <div class="card-dark fade-up" data-anim>
+          <h5>Кратко о выгодах</h5>
+          <p class="section-sub">Lemon Mall & HUAGE — сочетание маркетплейса и сети дистрибуции: работает как платформа продаж и как партнёрская программа с мотивацией лидеров. Мы даём набор инструментов для роста и удержания клиентов.</p>
+          <hr style="border-color:rgba(255,255,255,0.03)">
+          <ul style="list-style:none;padding:0;margin:0;color:var(--muted)">
+            <li>✓ Готовые обучающие материалы</li>
+            <li>✓ Интеграция с WhatsApp и CRM</li>
+            <li>✓ Личные менеджеры по регионам</li>
+            <li>✓ Возможность открыть пункт выдачи</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="facts" class="section">
+  <!-- WILDBERRIES FACTS (placed after Benefits for market proof) -->
+  <section id="facts-wb" class="section" style="background:linear-gradient(180deg, rgba(255,215,0,0.01), transparent)">
     <div class="container-x">
-      <div class="section-title"><h3>Интересные факты индустрии</h3></div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px">
-        <div class="card-dark p-4">
-          <h5 style="color:var(--gold)">Wildberries</h5>
-          <p class="section-sub">Основана в 2004 году, стала крупнейшим онлайн-ритейлером России. :contentReference[oaicite:2]{index=2}</p>
-          <ul style="color:var(--muted)"><li>• Оборот вырос примерно на 50% за год и достиг эквивалента $28 млрд. :contentReference[oaicite:3]{index=3}</li><li>• Работает в странах СНГ и Европе. :contentReference[oaicite:4]{index=4}</li><li>• Лидирует по числу онлайн-заказов и расширяет сеть выдачи.</li></ul>
+      <div class="section-title"><h3>Локальный кейс: Wildberries (индустрия и уроки)</h3></div>
+
+      <div class="facts-grid">
+        <div class="fact-card fade-up" data-anim>
+          <div>
+            <div class="big-num">2004</div>
+            <div class="small">Год основания Wildberries — пример органического роста до крупнейшего ритейлера в регионе.</div>
+          </div>
+          <div class="muted">Wildberries показал, как фокус на логистике и широкой сети пунктов выдачи даёт преимущество в регионах. Для Lemon Mall это модель быстрой доступности товаров.</div>
         </div>
-        <div class="card-dark p-4">
-          <h5 style="color:var(--gold)">Alibaba</h5>
-          <p class="section-sub">Основана в 1999 году Джеком Ма и 18 партнёрами, выросла до гиганта e-commerce с миллиардом пользователей. :contentReference[oaicite:5]{index=5}</p>
-          <ul style="color:var(--muted)"><li>• Одна из крупнейших e-commerce и AI-компаний мира. :contentReference[oaicite:6]{index=6}</li><li>• IPO в 2014 году на сумму $25 млрд — рекорд. :contentReference[oaicite:7]{index=7}</li><li>• Обслуживает сотни миллионов пользователей и миллионы продавцов. :contentReference[oaicite:8]{index=8}</li></ul>
+
+        <div class="fact-card fade-up" data-anim>
+          <div>
+            <div class="big-num">Масштаб</div>
+            <div class="small">Сильная сеть выдачи и локальная доступность — важный фактор удержания клиента.</div>
+          </div>
+          <div class="muted">Учимся: локальные пункты выдачи + простая коммуникация (WhatsApp/мессенджеры) — рабочая формула для СНГ.</div>
+        </div>
+
+        <div class="fact-card fade-up" data-anim>
+          <div>
+            <div class="big-num">Развитие</div>
+            <div class="small">Локальные маркетплейсы выигрывают за счёт быстрой доставки и адаптации к спросу.</div>
+          </div>
+          <div class="muted">Lemon Mall & HUAGE может использовать сильные стороны Wildberries: локальные курьерские решения и точки самовывоза.</div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- PARTNERS / Clients -->
   <section id="clients" class="section">
     <div class="container-x">
       <div class="section-title"><h3>Карточки партнёров</h3></div>
+
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px">
-        <div class="card-dark"><div style="display:flex;gap:14px;align-items:center"><img class="person-photo" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Мадина"><div><h5 style="margin:0;color:var(--gold)">Мадина</h5><div style="color:var(--muted);font-size:.92rem">Руководитель проекта • Казахстан</div><p style="margin-top:8px;color:var(--muted);font-size:.95rem">Наставник по воронкам продаж. Помогла 120 партнёрам выйти на первый доход за 7 дней.</p><div style="margin-top:8px"><a class="btn" href="https://wa.me/905060533279" style="background:var(--gold);color:#000;padding:8px 12px;border-radius:10px;font-weight:700;text-decoration:none">Написать в WhatsApp</a></div></div></div></div>
-        <div class="card-dark"><div style="display:flex;gap:14px;align-items:center"><img class="person-photo" src="https://randomuser.me/api/portraits/men/46.jpg" alt="Виктор"><div><h5 style="margin:0;color:var(--gold)">Виктор</h5><div style="color:var(--muted);font-size:.92rem">Координатор сети</div><p style="margin-top:8px;color:var(--muted);font-size:.95rem">Отвечает за стратегические процессы и digital-инструменты для лидов.</p></div></div></div>
-        <div class="card-dark"><div style="display:flex;gap:14px;align-items:center"><img class="person-photo" src="https://randomuser.me/api/portraits/men/11.jpg" alt="Айдар"><div><h5 style="margin:0;color:var(--gold)">Айдар</h5><div style="color:var(--muted);font-size:.92rem">Региональный руководитель</div><p style="margin-top:8px;color:var(--muted);font-size:.95rem">Развивает сеть в Центральной Азии и поддерживает маркетинговые кампании.</p></div></div></div>
+        <!-- Partner 1 -->
+        <div class="card-dark fade-up" data-anim>
+          <div style="display:flex;gap:14px;align-items:center">
+            <img class="person-photo" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Мадина">
+            <div>
+              <h5 style="margin:0;color:var(--gold)">Мадина</h5>
+              <div class="muted" style="font-size:.92rem">Руководитель проекта • Казахстан</div>
+              <p style="margin-top:8px;color:var(--muted);font-size:.95rem">Наставник по воронкам продаж. Помогла 120 партнёрам выйти на первый доход за 7 дней.</p>
+              <div style="margin-top:8px"><a class="btn" href="https://wa.me/905060533279" style="background:var(--gold);color:#000;padding:8px 12px;border-radius:10px;font-weight:700;text-decoration:none">Написать в WhatsApp</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Partner 2 -->
+        <div class="card-dark fade-up" data-anim>
+          <div style="display:flex;gap:14px;align-items:center">
+            <img class="person-photo" src="https://randomuser.me/api/portraits/men/46.jpg" alt="Виктор">
+            <div>
+              <h5 style="margin:0;color:var(--gold)">Виктор</h5>
+              <div class="muted" style="font-size:.92rem">Координатор сети</div>
+              <p style="margin-top:8px;color:var(--muted);font-size:.95rem">Отвечает за стратегические процессы и digital-инструменты для лидов.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Partner 3 -->
+        <div class="card-dark fade-up" data-anim>
+          <div style="display:flex;gap:14px;align-items:center">
+            <img class="person-photo" src="https://randomuser.me/api/portraits/men/11.jpg" alt="Айдар">
+            <div>
+              <h5 style="margin:0;color:var(--gold)">Айдар</h5>
+              <div class="muted" style="font-size:.92rem">Руководитель регионального направления</div>
+              <p style="margin-top:8px;color:var(--muted);font-size:.95rem">Развивает сеть в Центральной Азии и поддерживает маркетинговые кампании.</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
+  <!-- TIMELINE / PRIVILEGES -->
   <section class="section" style="background:linear-gradient(180deg, rgba(255,215,0,0.02), transparent)">
     <div class="container-x">
-      <div class="section-title"><h3>Дорожная карта и привилегии</h3></div>
+      <div class="section-title"><h3>Привилегии и дорожная карта</h3></div>
+
       <div class="timeline">
-        <div class="item"><div class="dot">1</div><div><strong>Регистрация партнёра</strong><div class="section-sub">Создаёшь профиль, получаешь доступ к материалам и кабинету партнёра.</div></div></div>
-        <div class="item"><div class="dot">2</div><div><strong>Обучение и старт</strong><div class="section-sub">Пройди обучение, получи промо-пакет и запусти первые продажи.</div></div></div>
-        <div class="item"><div class="dot">3</div><div><strong>Рост команды</strong><div class="section-sub">Набирай партнёров — получай бонусы, доступ к акциям и возможностям открытия пунктов выдачи.</div></div></div>
-        <div class="item"><div class="dot">★</div><div><strong>Статус и доля</strong><div class="section-sub">Старшие менеджеры получают дополнительные привилегии и участие в распределении акций.</div></div></div>
+        <div class="item fade-up" data-anim>
+          <div class="dot">1</div>
+          <div>
+            <strong>Регистрация партнёра</strong>
+            <div class="section-sub">Создаёшь профиль, получаешь доступ к материалам и кабинету партнёра.</div>
+          </div>
+        </div>
+
+        <div class="item fade-up" data-anim>
+          <div class="dot">2</div>
+          <div>
+            <strong>Обучение и старт</strong>
+            <div class="section-sub">Пройди обучение, получи промо-пакет и запусти первые продажи.</div>
+          </div>
+        </div>
+
+        <div class="item fade-up" data-anim>
+          <div class="dot">3</div>
+          <div>
+            <strong>Рост команды</strong>
+            <div class="section-sub">Набирай партнёров — получай бонусы, доступ к акциям и возможностям открытия пунктов выдачи.</div>
+          </div>
+        </div>
+
+        <div class="item fade-up" data-anim>
+          <div class="dot">★</div>
+          <div>
+            <strong>Статус и доля</strong>
+            <div class="section-sub">Старшие менеджеры получают дополнительные привилегии и участие в распределении акций.</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section" style="background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)">
+  <!-- TESTIMONIALS -->
+  <section class="section">
     <div class="container-x">
       <div class="section-title"><h3>Отзывы</h3></div>
       <div class="test-grid">
-        <div class="card-dark"><p style="color:var(--muted)">«Lemon Mall помог мне быстро набрать первую команду — инструменты и поддержка реально работают.»</p><div style="display:flex;gap:10px;align-items:center;margin-top:10px"><img src="https://randomuser.me/api/portraits/women/75.jpg" width="48" height="48" style="border-radius:50%;object-fit:cover"><div><strong>Aлия</strong><div style="color:var(--muted);font-size:.85rem">Партнёр</div></div></div></div>
-        <div class="card-dark"><p style="color:var(--muted)">«Инструменты лидогенерации и готовые скрипты экономят кучу времени — рекомендую новичкам.»</p><div style="display:flex;gap:10px;align-items:center;margin-top:10px"><img src="https://randomuser.me/api/portraits/men/33.jpg" width="48" height="48" style="border-radius:50%;object-fit:cover"><div><strong>Марс</strong><div style="color:var(--muted);font-size:.85rem">Лидер</div></div></div></div>
-        <div class="card-dark"><p style="color:var(--muted)">«Прозрачные выплаты и простая система обучения — отличный старт для всех, кто хочет делиться товарами.»</p><div style="display:flex;gap:10px;align-items:center;margin-top:10px"><img src="https://randomuser.me/api/portraits/men/72.jpg" width="48" height="48" style="border-radius:50%;object-fit:cover"><div><strong>Саид</strong><div style="color:var(--muted);font-size:.85rem">Продавец</div></div></div></div>
+        <div class="card-dark fade-up" data-anim>
+          <p class="muted">«Lemon Mall помог мне быстро набрать первую команду — инструменты и поддержка реально работают.»</p>
+          <div style="display:flex;gap:10px;align-items:center;margin-top:10px">
+            <img src="https://randomuser.me/api/portraits/women/75.jpg" width="48" height="48" style="border-radius:50%;object-fit:cover">
+            <div><strong>Aлия</strong><div class="muted" style="font-size:.85rem">Партнёр</div></div>
+          </div>
+        </div>
+        <div class="card-dark fade-up" data-anim>
+          <p class="muted">«Инструменты лидогенерации и готовые скрипты экономят кучу времени — рекомендую новичкам.»</p>
+          <div style="display:flex;gap:10px;align-items:center;margin-top:10px">
+            <img src="https://randomuser.me/api/portraits/men/33.jpg" width="48" height="48" style="border-radius:50%;object-fit:cover">
+            <div><strong>Марс</strong><div class="muted" style="font-size:.85rem">Лидер</div></div>
+          </div>
+        </div>
+        <div class="card-dark fade-up" data-anim>
+          <p class="muted">«Прозрачные выплаты и простая система обучения — отличный старт для всех, кто хочет делиться товарами.»</p>
+          <div style="display:flex;gap:10px;align-items:center;margin-top:10px">
+            <img src="https://randomuser.me/api/portraits/men/72.jpg" width="48" height="48" style="border-radius:50%;object-fit:cover">
+            <div><strong>Саид</strong><div class="muted" style="font-size:.85rem">Продавец</div></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <!-- FAQ -->
+  <section class="section" style="background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)">
     <div class="container-x">
       <div class="section-title"><h3>Частые вопросы</h3></div>
       <div style="display:grid;gap:12px">
-        <div class="faq-item"><strong>Сколько стоит вступление?</strong><div class="section-sub">Вход стандартно — $1000 (информация по пакетам — в личном кабинете).</div></div>
-        <div class="faq-item"><strong>Какие преимущества для лидеров?</strong><div class="section-sub">Доступ к акциям, обучение, возможность открыть пункт выдачи и получать дополнительный доход.</div></div>
-        <div class="faq-item"><strong>Как проходят выплаты комиссий?</strong><div class="section-sub">Выплаты прозрачны, вывод на карту или через партнёрский кабинет в установленные сроки.</div></div>
+        <div class="faq-item fade-up" data-anim>
+          <strong>Сколько стоит вступление?</strong>
+          <div class="section-sub">Вход стандартно — $1000 (информация по пакетам — в личном кабинете).</div>
+        </div>
+        <div class="faq-item fade-up" data-anim>
+          <strong>Какие преимущества для лидеров?</strong>
+          <div class="section-sub">Доступ к акциям, обучение, возможность открыть пункт выдачи и получать дополнительный доход.</div>
+        </div>
+        <div class="faq-item fade-up" data-anim>
+          <strong>Как проходит выплата комиссий?</strong>
+          <div class="section-sub">Выплаты прозрачны, вывод на карту или через партнёрский кабинет в установленные сроки.</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="contact" class="section" style="text-align:center">
-    <div class="container-x">
+  <!-- CONTACT / CTA -->
+  <section id="contact" class="section">
+    <div class="container-x" style="text-align:center">
       <h3 style="color:var(--gold)">Готов присоединиться?</h3>
-      <p class="section-sub" style="max-width:760px;margin:8px auto 18px">Нажми на кнопку ниже — наш менеджер свяжется с тобой в WhatsApp и проведёт по шагам: регистрация, запуск и первые продажи.</p>
+      <p class="section-sub" style="max-width:760px;margin:8px auto 18px">Нажми кнопку ниже — наш менеджер свяжется с тобой в WhatsApp и проведёт по шагам: регистрация, запуск и первые продажи.</p>
       <a class="btn" href="https://wa.me/905060533279" style="background:var(--gold);color:#000;padding:14px 20px;border-radius:12px;font-weight:800;text-decoration:none">Написать в WhatsApp</a>
       <div style="margin-top:16px;color:var(--muted)">Или напиши: <strong>+90 506 053 32 79</strong></div>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
-    <div class="container-x" style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap">
-      <div><strong style="color:var(--gold)">Lemon Mall & HUAGE</strong><br><small style="color:var(--muted)">© 2025. Все права защищены.</small></div>
-      <div style="text-align:right;color:var(--muted)">Email: <a href="mailto:info@lemonmall.kz" style="color:var(--gold)">info@lemonmall.kz</a><br><div style="margin-top:8px"><a href="https://wa.me/905060533279" style="color:var(--gold)">WhatsApp: +90 506 053 32 79</a></div></div>
+    <div class="container-x d-flex justify-content-between align-items-center gap-20 flex-wrap">
+      <div>
+        <strong style="color:var(--gold)">Lemon Mall & HUAGE</strong><br>
+        <small class="muted">© 2025. Все права защищены.</small>
+      </div>
+      <div style="text-align:right;color:var(--muted)">
+        Email: <a href="mailto:info@lemonmall.kz" style="color:var(--gold)">info@lemonmall.kz</a><br>
+        <div style="margin-top:8px"><a href="https://wa.me/905060533279" style="color:var(--gold)">WhatsApp: +90 506 053 32 79</a></div>
+      </div>
     </div>
   </footer>
 
-  <a class="whatsapp-fixed" href="https://wa.me/905060533279" target="_blank" rel="noopener"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="wa">Связаться</a>
+  <!-- WhatsApp floating button -->
+  <a class="whatsapp-fixed" href="https://wa.me/905060533279" target="_blank" rel="noopener">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="wa" style="height:20px;margin-right:8px;vertical-align:middle">Связаться
+  </a>
 
+  <!-- SCRIPTS: counters + animations + faq toggle -->
   <script>
-    function animateCount(id,end,duration){
-      const el=document.getElementById(id);
+    // Topbar shadow on scroll
+    (function(){
+      const topbar = document.getElementById('topbar');
+      window.addEventListener('scroll', function(){
+        if(window.scrollY > 20) topbar.classList.add('scrolled'); else topbar.classList.remove('scrolled');
+      });
+    })();
+
+    // Animated counters
+    function animateCount(id, end, duration){
+      const el = document.getElementById(id);
       if(!el) return;
-      const start=0;
-      const range=end-start;
-      let startTime=null;
+      const start = 0;
+      const range = end - start;
+      let startTime = null;
       function step(timestamp){
-        if(!startTime) startTime=timestamp;
-        const progress=Math.min((timestamp-startTime)/duration,1);
-        el.textContent=Math.floor(progress*range+start).toLocaleString();
-        if(progress<1) window.requestAnimationFrame(step);
-        else if(id==='counter-partners') el.textContent=end.toLocaleString()+'+';
+        if(!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        el.textContent = Math.floor(progress * range + start).toLocaleString();
+        if(progress < 1) window.requestAnimationFrame(step);
+        else el.textContent = end.toLocaleString() + (id==='counter-partners' ? '+' : '');
       }
       window.requestAnimationFrame(step);
     }
+
+    // Start counters when visible
     function isInViewport(el){
-      const rect=el.getBoundingClientRect();
-      return rect.top< (window.innerHeight||document.documentElement.clientHeight) && rect.bottom>=0;
+      const rect = el.getBoundingClientRect();
+      return rect.top < (window.innerHeight || document.documentElement.clientHeight) && rect.bottom >= 0;
     }
-    let countersStarted=false;
-    function tryStart(){
-      const target=document.getElementById('counter-partners');
+    let countersStarted = false;
+    function tryStartCounters(){
+      const target = document.getElementById('counter-partners');
       if(!target) return;
       if(!countersStarted && isInViewport(target)){
-        countersStarted=true;
-        animateCount('counter-partners',10000,1300);
-        animateCount('counter-pickups',120,900);
-        animateCount('counter-countries',6,800);
+        countersStarted = true;
+        animateCount('counter-partners', 10000, 1300);
+        animateCount('counter-pickups', 120, 900);
+        animateCount('counter-countries', 6, 800);
       }
     }
-    window.addEventListener('scroll',tryStart);
-    window.addEventListener('load',tryStart);
-    document.querySelectorAll('.faq-item').forEach((f)=>{
+    window.addEventListener('scroll', tryStartCounters);
+    window.addEventListener('load', tryStartCounters);
+
+    // FAQ toggle with smooth height
+    document.querySelectorAll('.faq-item').forEach(function(f){
       f.style.cursor='pointer';
-      f.addEventListener('click',()=>{ f.classList.toggle('open'); if(f.style.maxHeight) f.style.maxHeight=null; else f.style.maxHeight='400px'; });
+      f.style.overflow='hidden';
+      f.style.maxHeight='60px';
+      f.addEventListener('click', function(){
+        if(this.classList.contains('open')){
+          this.classList.remove('open');
+          this.style.maxHeight='60px';
+        } else {
+          this.classList.add('open');
+          this.style.maxHeight='400px';
+        }
+      });
     });
+
+    // Fade-up appear on scroll
+    const appearElems = document.querySelectorAll('[data-anim]');
+    const appearOnScroll = function(){
+      const offset = window.innerHeight * 0.9;
+      appearElems.forEach(el=>{
+        const rect = el.getBoundingClientRect();
+        if(rect.top < offset){
+          el.classList.add('is-visible');
+        }
+      });
+    };
+    window.addEventListener('scroll', appearOnScroll);
+    window.addEventListener('load', function(){ appearOnScroll(); tryStartCounters(); });
+
+    // small accessibility: focus outline for keyboard users
+    document.body.addEventListener('keydown', function(e){
+      if(e.key === 'Tab') document.documentElement.classList.add('show-focus');
+    });
+
+    // Prevent layout shifts for images: set intrinsic sizes (if available) - nothing to do here as images are remote
   </script>
 
 </body>
